@@ -1,6 +1,7 @@
-const { Manager } = require("./lib/Engineer");
+const { Manager } = require("./lib");
 const { Engineer } = require("./lib/Engineer");
 const { Intern } = require("./lib/Intern");
+const { markdown } = require("./src");
 
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -168,3 +169,26 @@ const employeeArr = () => {
       }
     });
 };
+
+//now to write the HTML page to the dist directory.
+const writeFile = (data) => {
+  fs.writeFile("./dist/index.html", data, (err) => {
+    if (err) {
+      return;
+    } else {
+      console.log(`Your Team profile has been succesfully generated!!!`);
+    }
+  });
+};
+
+managerArr()
+  .then(employeeArr)
+  .then((teamArray) => {
+    return markdown(teamArray);
+  })
+  .then((HTMLfile) => {
+    return writeFile(HTMLfile);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
