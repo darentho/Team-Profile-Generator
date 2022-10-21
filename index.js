@@ -1,11 +1,10 @@
-const { Manager } = require("./lib");
+const Manager = require("./lib/Manager");
 const { Engineer } = require("./lib/Engineer");
 const { Intern } = require("./lib/Intern");
-const { markdown } = require("./src");
+const markdown = require("./src/markdown");
 
 const fs = require("fs");
 const inquirer = require("inquirer");
-const { managerArr } = require("./lib/Employee");
 
 const teamArray = [];
 
@@ -17,6 +16,14 @@ const addManager = () => {
         type: "input",
         name: "name",
         message: "Who's your Team Manager?",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log(`Please input your Manager's name`);
+            return false;
+          }
+        },
       },
       {
         type: "input",
@@ -181,7 +188,7 @@ const writeFile = (data) => {
   });
 };
 
-managerArr()
+addManager()
   .then(employeeArr)
   .then((teamArray) => {
     return markdown(teamArray);
