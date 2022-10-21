@@ -1,6 +1,6 @@
 const Manager = require("./lib/Manager");
-const { Engineer } = require("./lib/Engineer");
-const { Intern } = require("./lib/Intern");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const markdown = require("./src/markdown");
 
 const fs = require("fs");
@@ -99,6 +99,19 @@ const employeeArr = () => {
           } else {
             console.log(`Please input a valid Employee's name`);
             return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "id",
+        message: "Please input your employee's ID",
+        validate: (nameInput) => {
+          if (isNaN(nameInput)) {
+            console.log(`Please enter a valid employee ID`);
+            return false;
+          } else {
+            return true;
           }
         },
       },
