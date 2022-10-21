@@ -3,12 +3,13 @@
 }
 
 :root {
-    --primary: lightslategray;
+    --primary: rgb(39, 119, 198);
     --secondary: white;
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background-color: azure;
 }
 
 #navbar {
@@ -25,16 +26,25 @@ body {
 .card-header {
     background-color: var(--primary);
     color: var(--secondary);
+    border: 1px solid black; 
 }
 
 .card-body {
     background-color: var(--secondary);
     color: var(--primary);
+    border: 1px solid black; 
+    
 }
 
 .container {
     margin: 100px auto;
     justify-content: space-evenly;
     display: flex;
+    
+    
+}
+
+.col-4 {
+    max-width: 400px; 
     
 }
