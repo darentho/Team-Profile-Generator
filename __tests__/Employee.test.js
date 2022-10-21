@@ -8,24 +8,34 @@ test("Generate object for Employee", () => {
 });
 //Check for Employee methods.
 
-test("get employee name", () => {
-  const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
+test("gets methods", () => {
+  const employee = new Employee("Alberto Monroy", 80, "firewind3882@gmail.com");
   expect(employee.getName()).toEqual(expect.any(String));
-});
-
-test("get employee ID", () => {
-  const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
   expect(employee.getId()).toEqual(expect.any(Number));
-});
-
-test("get employee email", () => {
-  const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
   expect(employee.getEmail()).toEqual(
     expect.stringContaining(employee.email.toString())
   );
-});
-
-test("get employee role", () => {
-  const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
   expect(employee.getRole()).toEqual("Employee");
 });
+
+// test("get employee name", () => {
+//   const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
+//   expect(employee.getName()).toEqual(expect.any(String));
+// });
+
+// test("get employee ID", () => {
+//   const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
+//   expect(employee.getId()).toEqual(expect.any(Number));
+// });
+
+// test("get employee email", () => {
+//   const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
+//   expect(employee.getEmail()).toEqual(
+//     expect.stringContaining(employee.email.toString())
+//   );
+// });
+
+// test("get employee role", () => {
+//   const employee = new Employee("Alberto", 80, "firewind3882@gmail.com");
+//   expect(employee.getRole()).toEqual("Employee");
+// });
