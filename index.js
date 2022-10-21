@@ -73,84 +73,98 @@ const addManager = () => {
 
 const employeeArr = () => {
   console.log(`function to add employee`);
-return inquirer 
-.prompt([
-  {
-type: "list", 
-name: "role", 
-message: "Please select your employee's role", 
-choices: ["Engineer", "Intern"], 
-  }
-  {
-    type: "input", 
-    name: "name", 
-    message: "Input your Employee's Name", 
-    validate: (nameInput) => {
-      if (nameInput) {
-        return true; 
-      } else {
-        console.log(`Please input a valid Employee's name`)
-        return false; 
+  return inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "role",
+        message: "Please select your employee's role",
+        choices: ["Engineer", "Intern"],
+      },
+      {
+        type: "input",
+        name: "name",
+        message: "Input your Employee's Name",
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log(`Please input a valid Employee's name`);
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "email",
+        message: "Please sinput your employee's email.",
+        validate: (email) => {
+          validate =
+            /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
+              email
+            );
+          if (valid) {
+            return true;
+          } else {
+            console.log(`Please enter a valid Email.`);
+            return false;
+          }
+        },
+      },
+      {
+        type: "input",
+        name: "github",
+        message: "Please input your employee's github user name",
+        when(input) {
+          return input.role === "Engineer";
+        },
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log(`Please input a github username!`);
+          }
+        },
+      },
+
+      {
+        type: "input",
+        name: "school",
+        message: "Please input your Intern's School",
+        when(input) {
+          return input.role === "Intern";
+        },
+        validate: (nameInput) => {
+          if (nameInput) {
+            return true;
+          } else {
+            console.log(`Please enter your Intern's School!!!`);
+          }
+        },
+      },
+      {
+        type: "confirm",
+        name: "confirmEmployeeArr",
+        message: "Would you like to add more members for your Team?",
+        default: false,
+      },
+    ])
+    .then((employeeInfo) => {
+      let { name, id, email, role, github, school, confirmAddEmployee } =
+        employeeInfo;
+      let employee;
+      if (role === "Engineer") {
+        employee = new Engineer(name, id, email, github);
+        console.log(employee);
+      } else if (role === "Intern") {
+        employee = new Intern(name, id, email, school);
+        console.log(employee);
       }
-    }
-  },
-{
-  type: "input", 
-  name: "email", 
-  message: "Please sinput your employee's email.", 
-  validate: (email) => {
-    validate = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(
-      email
-    );
-    if (valid) {
-      return true; 
-    } else {
-      console.log(`Please enter a valid Email.`)
-      return false;
-    }
-     }
-},
-{
-type: "input", 
-name: "github", 
-message: "Please input your employee's github user name",
-when(input) {
-  return input.role === "Engineer";
-  },
-  validate: (nameInput) => {
-    if (nameInput) {
-return true; 
-    } else {
-      console.log(`Please input a github username!`)
-    }
-  }
-},
-
-{
-type: "input", 
-name: "school", 
-message: "Please input your Intern's School", 
-when(input) {
-  return input.role === "Intern"; 
-}, 
-validate: (nameInput) => {
-  if (nameInput) {
-    return true; 
-  }else {
-    console.log(`Please enter your Intern's School!!!`)
-  }
-}
-}, 
-{
-  type: "confirm", 
-  name: "confirmEmployeeArr", 
-  message: "Would you like to add more members for your Team?", 
-  default: false,
-}, 
-])
-
-
-
-
-
+      teamArray.push(employee);
+      if (confirmAddEmployee) {
+        return employeeArr(teamArray);
+      } else {
+        return teamArray;
+      }
+    });
 };
