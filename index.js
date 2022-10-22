@@ -62,7 +62,7 @@ const addManager = () => {
         message: "Please enter the manager's office number",
         validate: (nameInput) => {
           if (isNaN(nameInput)) {
-            console.log(`Please enter an office number!`);
+            console.log(`Please enter a valid office number!`);
             return false;
           } else {
             return true;
@@ -80,7 +80,7 @@ const addManager = () => {
 };
 
 const employeeArr = () => {
-  console.log(`function to add employee`);
+  console.log(`Please add another employee!`);
   return inquirer
     .prompt([
       {
@@ -171,7 +171,7 @@ const employeeArr = () => {
       },
     ])
     .then((employeeInfo) => {
-      let { name, id, email, role, github, school, confirmAddEmployee } =
+      let { name, id, email, role, github, school, confirmEmployeeArr } =
         employeeInfo;
       let employee;
       if (role === "Engineer") {
@@ -182,7 +182,7 @@ const employeeArr = () => {
         console.log(employee);
       }
       teamArray.push(employee);
-      if (confirmAddEmployee) {
+      if (confirmEmployeeArr) {
         return employeeArr(teamArray);
       } else {
         return teamArray;
