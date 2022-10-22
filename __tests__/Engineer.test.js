@@ -3,7 +3,7 @@ const Engineer = require("../lib/Engineer");
 test("Creates new Engineer Object", () => {
   const employee = new Engineer(
     "Alberto Monroy",
-    01,
+    80,
     "firewind3882@gmail.com",
     "darentho"
   );
@@ -17,7 +17,7 @@ test("Creates new Engineer Object", () => {
 test("Checks all methods for Engineer class", () => {
   const employee = new Engineer(
     "Alberto Monroy",
-    01,
+    80,
     "firewind3882@gmail.com",
     "darentho"
   );
